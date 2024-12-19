@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ApiDocumentation.css";
 // import { Link } from 'react-router-dom'; // Make sure this import exists
 import TableOfContents from "./TableOfContents";
@@ -17,7 +17,6 @@ const DbConfigAPI = () => {
         functionalities. It uses the <code>mysql2</code> package to configure a
         connection pool for interacting with the MySQL database.
       </p>
-
       <h3>Database Connection:</h3>
       <p>
         The MySQL connection is configured using a connection pool to manage
@@ -31,7 +30,6 @@ const DbConfigAPI = () => {
   database: process.env.DB_NAME,
   connectionLimit: 10
 });`}</pre>
-
       <p>
         <strong>The connection pool</strong> allows up to 10 concurrent
         connections to the database, providing scalability for database queries.
@@ -44,7 +42,6 @@ const DbConfigAPI = () => {
         resource management. By limiting the number of connections, it prevents
         database overload and ensures faster query execution.
       </p>
-
       <h3>SQL Table Creation:</h3>
       <p>
         This file also defines SQL queries for creating three main tables:{" "}
@@ -52,7 +49,6 @@ const DbConfigAPI = () => {
         <strong>answers</strong>, which are used to store user data, user
         questions, and user answers, respectively.
       </p>
-
       <h4>Users Table:</h4>
       <pre>{`CREATE TABLE if not exists users(
   userId INT(20) NOT NULL AUTO_INCREMENT,
@@ -70,7 +66,6 @@ const DbConfigAPI = () => {
         name, last name, email, and password. It also tracks when a user
         registered and their last login time.
       </p>
-
       <h4>Questions Table:</h4>
       <pre>{`CREATE TABLE if not exists questions(
   id INT(20) NOT NULL AUTO_INCREMENT,
@@ -89,7 +84,6 @@ const DbConfigAPI = () => {
         links each question to the user who created it using the{" "}
         <code>userId</code> foreign key.
       </p>
-
       <h4>Answers Table:</h4>
       <pre>{`CREATE TABLE if not exists answers(
   answerId INT(20) NOT NULL AUTO_INCREMENT,
@@ -106,7 +100,6 @@ const DbConfigAPI = () => {
         specific questions. It links answers to questions and users through the{" "}
         <code>questionId</code> and <code>userId</code> foreign keys.
       </p>
-
       <h3>Response Behavior:</h3>
       <p>
         Upon loading the application, the database connection pool is
@@ -114,7 +107,6 @@ const DbConfigAPI = () => {
         tables don't already exist, they will be created automatically. If the
         table creation is successful, a console log message will indicate it.
       </p>
-
       <h3>Error Handling:</h3>
       <p>
         In case of errors during table creation or database interactions, the
@@ -122,7 +114,6 @@ const DbConfigAPI = () => {
         to the console. Ensure that the environment variables are correctly set
         up.
       </p>
-
       <h4>Error Response:</h4>
       <p>
         <strong>Status Code:</strong> 500 Internal Server Error
@@ -136,9 +127,129 @@ const DbConfigAPI = () => {
         the database or executing a query. It can also happen if the required
         environment variables are missing or incorrect.
       </p>
+      // acheck db & server both are success fully started h
     </section>
   );
 };
+
+//db & server both are successfull
+const StartConnectionDoc = () => {
+  return (
+    <section className="api-section" id="start-connection-api">
+      <h2>startConnection Function</h2>
+      <p>
+        <strong>File:</strong> <code>startConnection.js</code>
+      </p>
+      <p>
+        <strong>Description:</strong> The <code>startConnection</code> function
+        is responsible for establishing a database connection and starting the
+        server. It first checks if the database is reachable by executing a test
+        query and then starts the server on the specified port. If successful,
+        it logs relevant success messages, and if any error occurs during the
+        process, the error is caught and logged.
+      </p>
+
+      <h3>Function Signature:</h3>
+      <pre>{`
+const startConnection = async () => {
+  try {
+    const port = 3000;  // Define the port here, or get it from environment: process.env.PORT || 3000
+    const result = await dbPromise.execute("select 'test'");
+    console.log(result);
+    await app.listen(port);
+    console.log("database connected");
+    console.log(\`server running on http://localhost:\$(port)\`);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+`}</pre>
+
+      <h3>Parameters:</h3>
+      <p>This function does not take any parameters.</p>
+
+      <h3>Return Value:</h3>
+      <p>
+        The function does not return any value. It logs the database connection
+        status and server startup status to the console.
+      </p>
+
+      <h3>Response Behavior:</h3>
+      <p>
+        Upon successful database connection and server start, the following
+        messages are logged:
+      </p>
+      <ul>
+        <li>
+          "database connected" - Indicates that the database connection was
+          successful.
+        </li>
+        <li>
+          `server running on http://localhost:port` - Logs the server's URL,
+          including the specified port.
+        </li>
+      </ul>
+
+      <h3>Example Usage:</h3>
+      <pre>{`startConnection();`}</pre>
+      <p>
+        Calling the <code>startConnection()</code> function will attempt to
+        connect to the database and start the server. It will log success or
+        error messages to the console.
+      </p>
+
+      <h3>Potential Errors:</h3>
+      <p>
+        If there are issues during the database query or server startup, errors
+        will be logged. Some potential errors include:
+      </p>
+      <ul>
+        <li>Database connection failure</li>
+        <li>Server startup failure (e.g., incorrect port)</li>
+        <li>Issues with asynchronous operations or query execution</li>
+      </ul>
+
+      <h3>Error Handling:</h3>
+      <p>
+        If an error occurs, it is caught in the <code>catch</code> block, and
+        the error message is logged to the console. Some examples of error
+        responses:
+      </p>
+
+      <h4>Error Response Example:</h4>
+      <p>
+        <strong>Status Code:</strong> 500 Internal Server Error
+      </p>
+      <pre>{`{
+  "success": false,
+  "msg": "Something went wrong, try again later!"
+}`}</pre>
+      <p>
+        This error typically occurs when there is a problem with the database
+        connection or the server startup process.
+      </p>
+
+      <h3>Notes:</h3>
+      <ul>
+        <li>
+          The function uses <code>dbPromise</code> to execute the database
+          query, which is assumed to be a promise-based API for database
+          operations.
+        </li>
+        <li>
+          The server is started using <code>app.listen(port)</code>, where{" "}
+          <code>port</code> is the port the server should run on.
+        </li>
+        <li>
+          The test query <code>select 'test'</code> is used to ensure that the
+          database connection is valid and the database is reachable.
+        </li>
+      </ul>
+    </section>
+  );
+};
+// *********************
+
 // Authentication Middleware API Document **********************************
 const AuthAPI = () => {
   return (
@@ -277,9 +388,9 @@ const RegisterAPI = () => {
       </p>
 
       <h4>Error Responses:</h4>
-      <div class="container">
-        <div class="circle">1</div>
-        <div class="error-text">
+      <div className="container">
+        <div className="circle">1</div>
+        <div className="error-text">
           <h5>Missing Required Fields</h5>
         </div>
       </div>
@@ -296,9 +407,9 @@ const RegisterAPI = () => {
         <strong>Description:</strong> One or more required fields are missing in
         the request body.
       </p>
-      <div class="container">
-        <div class="circle">2</div>
-        <div class="error-text">
+      <div className="container">
+        <div className="circle">2</div>
+        <div className="error-text">
           <h5>User Already Exists</h5>
         </div>
       </div>
@@ -316,9 +427,9 @@ const RegisterAPI = () => {
         the registration fails.
       </p>
 
-      <div class="container">
-        <div class="circle">3</div>
-        <div class="error-text">
+      <div className="container">
+        <div className="circle">3</div>
+        <div className="error-text">
           <h5>Password Validation Failed (less than 8 characters)</h5>
         </div>
       </div>
@@ -335,9 +446,9 @@ const RegisterAPI = () => {
         <strong>Description:</strong> The password must be at least 8 characters
         long.
       </p>
-      <div class="container">
-        <div class="circle">4</div>
-        <div class="error-text">
+      <div className="container">
+        <div className="circle">4</div>
+        <div className="error-text">
           <h5>Internal Server Error</h5>
         </div>
       </div>
@@ -428,9 +539,9 @@ const LoginAPI = () => {
       </p>
 
       <h4>Error Responses:</h4>
-      <div class="container">
-        <div class="circle">1</div>
-        <div class="error-text">
+      <div className="container">
+        <div className="circle">1</div>
+        <div className="error-text">
           <h5>Missing Required Fields</h5>
         </div>
       </div>
@@ -447,9 +558,9 @@ const LoginAPI = () => {
         <strong>Description:</strong> Either the email or password is missing in
         the request body.
       </p>
-      <div class="container">
-        <div class="circle">2</div>
-        <div class="error-text">
+      <div className="container">
+        <div className="circle">2</div>
+        <div className="error-text">
           <h5>Invalid Credentials</h5>
         </div>
       </div>
@@ -467,9 +578,9 @@ const LoginAPI = () => {
         password is incorrect.
       </p>
 
-      <div class="container">
-        <div class="circle">3</div>
-        <div class="error-text">
+      <div className="container">
+        <div className="circle">3</div>
+        <div className="error-text">
           <h5>Internal Server Error</h5>
         </div>
       </div>
@@ -663,8 +774,6 @@ const GetAnswerAPI = () => {
     </section>
   );
 };
-
-
 
 // Get AllQuestion API DOcumente *****************************
 const GetAllQuestionsAPI = () => {
@@ -994,34 +1103,41 @@ const PostQuestionAPI = () => {
 };
 
 // Main ApiDocumentation Component
+
 const ApiDocumentation = () => {
   return (
-    <div className="documentation-container">
-      <div className="documentation-content-wrapper">
-        {/* Left Sidebar: Table of Contents */}
-        <div className="toc-sidebar">
-          <TableOfContents /> {/* TOC Sidebar on the left */}
-        </div>
+    <>
+      <div className="container container--flex container--flex--wrap">
+        <h1>Evangadi Forum API Documentation</h1>
+      </div>
+      <div className="documentation-container">
+        <div className="documentation-content-wrapper">
+          {/* Left Sidebar: Table of Contents */}
+          <div className="toc-sidebar">
+            <TableOfContents /> {/* TOC Sidebar on the left */}
+          </div>
 
-        {/* Right Content Area: API Documentation */}
-        <div className="api-content">
-          <h1>Evangadi Forum API Documentation</h1>
-          <hr />
-          <h2>Welcome to the API documentation</h2>
-          <p>Below are the details of the available endpoints:</p>
-          {/* These sections will be linked from the TOC */}
-          <DbConfigAPI />
-          <AuthAPI />
-          <RegisterAPI />
-          <LoginAPI />
-          <GetAnswerAPI />
-          <PostAnswerAPI />
-          <GetAllQuestionsAPI />
-          <GetSingleQuestionAPI />
-          <PostQuestionAPI />
+          {/* Right Content Area: API Documentation */}
+
+          <div className="api-content">
+            <h2>Welcome to the API documentation</h2>
+            <p>Below are the details of the available endpoints:</p>
+            <hr />
+            {/* These sections will be linked from the TOC */}
+            <StartConnectionDoc />
+            <DbConfigAPI />
+            <AuthAPI />
+            <RegisterAPI />
+            <LoginAPI />
+            <GetAnswerAPI />
+            <PostAnswerAPI />
+            <GetAllQuestionsAPI />
+            <GetSingleQuestionAPI />
+            <PostQuestionAPI />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
