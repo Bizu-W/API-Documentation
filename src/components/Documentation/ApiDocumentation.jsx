@@ -248,7 +248,6 @@ const DbConfigAPI = () => {
   );
 };
 
-
 // *********************
 
 // Authentication Middleware API Document **********************************
@@ -353,7 +352,6 @@ const RegisterAPI = () => {
         at least 8 characters long. If the username or email is already taken,
         registration will fail.
       </p>
-
       <h3>Request Body:</h3>
       <p>The request body should contain the following fields:</p>
       <pre>
@@ -369,7 +367,6 @@ const RegisterAPI = () => {
         <strong>Required Fields:</strong> `userName`, `firstName`, `lastName`,
         `email`, and `password` are mandatory for registration.
       </p>
-
       <h3>Response:</h3>
       <h4>Successful Response:</h4>
       <p>
@@ -387,15 +384,11 @@ const RegisterAPI = () => {
         <strong>Description:</strong> If registration is successful, the API
         returns a success message.
       </p>
-
-      <h4>Error Responses:</h4>
-      <div className="container">
+      <h4>Error Responses:(Missing Required Fields)</h4>
+      {/* <div className="container">
         <div className="circle">1</div>
-        <div className="error-text">
-          <h5>Missing Required Fields</h5>
-        </div>
-      </div>
-
+        <div className="error-text"><h5></h5></div>
+      </div> */}
       <p>
         <strong>Status Code:</strong> 400 Bad Request
       </p>
@@ -408,14 +401,8 @@ const RegisterAPI = () => {
         <strong>Description:</strong> One or more required fields are missing in
         the request body.
       </p>
-      <div className="container">
-        <div className="circle">2</div>
-        <div className="error-text">
-          <h5>User Already Exists</h5>
-        </div>
-      </div>
-
       <p>
+        <h4>Error Responses:(User Already Exists)</h4>
         <strong>Status Code:</strong> 400 Bad Request
       </p>
       <pre>
@@ -428,12 +415,9 @@ const RegisterAPI = () => {
         the registration fails.
       </p>
 
-      <div className="container">
-        <div className="circle">3</div>
-        <div className="error-text">
-          <h5>Password Validation Failed (less than 8 characters)</h5>
-        </div>
-      </div>
+      <h4>
+        Error Responses:Password Validation Failed (less than 8 characters)
+      </h4>
 
       <p>
         <strong>Status Code:</strong> 400 Bad Request
@@ -447,13 +431,8 @@ const RegisterAPI = () => {
         <strong>Description:</strong> The password must be at least 8 characters
         long.
       </p>
-      <div className="container">
-        <div className="circle">4</div>
-        <div className="error-text">
-          <h5>Internal Server Error</h5>
-        </div>
-      </div>
 
+      <h4>Error Responses:(Internal Server Error)</h4>
       <p>
         <strong>Status Code:</strong> 500 Internal Server Error
       </p>
@@ -467,7 +446,6 @@ const RegisterAPI = () => {
         typically happens if there's an issue with database operations or other
         unexpected issues.
       </p>
-
       <div className="api-doc-section">
         <h3>Example Usage</h3>
 
