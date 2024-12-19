@@ -1,5 +1,9 @@
 /* General Container Styling */
-
+*{
+  margin:0;
+  padding:0;
+  
+}
 /* Section Styling for Each API */
 .api-section {
   margin-bottom: 30px;
