@@ -8,6 +8,9 @@ function TableOfContents() {
       </h3>
       <ul>
         <li>
+          <a href="#srvstr-api">Start Connection</a>
+        </li>
+        <li>
           <a href="#con-api">Connection&Table Creation</a>
         </li>
         {/* Links pointing to the corresponding section IDs */}

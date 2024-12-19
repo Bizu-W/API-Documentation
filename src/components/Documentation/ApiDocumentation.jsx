@@ -3,6 +3,122 @@ import "./ApiDocumentation.css";
 // import { Link } from 'react-router-dom'; // Make sure this import exists
 import TableOfContents from "./TableOfContents";
 
+//db & server both are successfull
+const StartConnectionDoc = () => {
+  return (
+    <section className="api-section" id="srvstr-api">
+      <h2>Start Connection</h2>
+      <p>
+        <strong>File:</strong> <code>startConnection.js</code>
+      </p>
+      <p>
+        <strong>Description:</strong> The <code>startConnection</code> function
+        is responsible for establishing a database connection and starting the
+        server. It first checks if the database is reachable by executing a test
+        query and then starts the server on the specified port. If successful,
+        it logs relevant success messages, and if any error occurs during the
+        process, the error is caught and logged.
+      </p>
+
+      <h3>Function Signature:</h3>
+      <pre>{`
+const startConnection = async () => {
+  try {
+    const port = 3000;  // Define the port here, or get it from environment: process.env.PORT || 3000
+    const result = await dbPromise.execute("select 'test'");
+    console.log(result);
+    await app.listen(port);
+    console.log("database connected");
+    console.log(\`server running on http://localhost:\$(port)\`);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+`}</pre>
+
+      <h3>Parameters:</h3>
+      <p>This function does not take any parameters.</p>
+
+      <h3>Return Value:</h3>
+      <p>
+        The function does not return any value. It logs the database connection
+        status and server startup status to the console.
+      </p>
+
+      <h3>Response Behavior:</h3>
+      <p>
+        Upon successful database connection and server start, the following
+        messages are logged:
+      </p>
+      <ul>
+        <li>
+          "database connected" - Indicates that the database connection was
+          successful.
+        </li>
+        <li>
+          `server running on http://localhost:port` - Logs the server's URL,
+          including the specified port.
+        </li>
+      </ul>
+
+      <h3>Example Usage:</h3>
+      <pre>{`startConnection();`}</pre>
+      <p>
+        Calling the <code>startConnection()</code> function will attempt to
+        connect to the database and start the server. It will log success or
+        error messages to the console.
+      </p>
+
+      <h3>Potential Errors:</h3>
+      <p>
+        If there are issues during the database query or server startup, errors
+        will be logged. Some potential errors include:
+      </p>
+      <ul>
+        <li>Database connection failure</li>
+        <li>Server startup failure (e.g., incorrect port)</li>
+        <li>Issues with asynchronous operations or query execution</li>
+      </ul>
+
+      <h3>Error Handling:</h3>
+      <p>
+        If an error occurs, it is caught in the <code>catch</code> block, and
+        the error message is logged to the console. Some examples of error
+        responses:
+      </p>
+
+      <h4>Error Response Example:</h4>
+      <p>
+        <strong>Status Code:</strong> 500 Internal Server Error
+      </p>
+      <pre>{`{
+  "success": false,
+  "msg": "Something went wrong, try again later!"
+}`}</pre>
+      <p>
+        This error typically occurs when there is a problem with the database
+        connection or the server startup process.
+      </p>
+
+      <h3>Notes:</h3>
+      <ul>
+        <li>
+          The function uses <code>dbPromise</code> to execute the database
+          query, which is assumed to be a promise-based API for database
+          operations.
+        </li>
+        <li>
+          The server is started using <code>app.listen(port)</code>, where{" "}
+          <code>port</code> is the port the server should run on.
+        </li>
+        <li>
+          The test query <code>select 'test'</code> is used to ensure that the
+          database connection is valid and the database is reachable.
+        </li>
+      </ul>
+    </section>
+  );
+};
 // db connection API document ********************************************
 const DbConfigAPI = () => {
   return (
@@ -132,122 +248,7 @@ const DbConfigAPI = () => {
   );
 };
 
-//db & server both are successfull
-const StartConnectionDoc = () => {
-  return (
-    <section className="api-section" id="start-connection-api">
-      <h2>startConnection Function</h2>
-      <p>
-        <strong>File:</strong> <code>startConnection.js</code>
-      </p>
-      <p>
-        <strong>Description:</strong> The <code>startConnection</code> function
-        is responsible for establishing a database connection and starting the
-        server. It first checks if the database is reachable by executing a test
-        query and then starts the server on the specified port. If successful,
-        it logs relevant success messages, and if any error occurs during the
-        process, the error is caught and logged.
-      </p>
 
-      <h3>Function Signature:</h3>
-      <pre>{`
-const startConnection = async () => {
-  try {
-    const port = 3000;  // Define the port here, or get it from environment: process.env.PORT || 3000
-    const result = await dbPromise.execute("select 'test'");
-    console.log(result);
-    await app.listen(port);
-    console.log("database connected");
-    console.log(\`server running on http://localhost:\$(port)\`);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-`}</pre>
-
-      <h3>Parameters:</h3>
-      <p>This function does not take any parameters.</p>
-
-      <h3>Return Value:</h3>
-      <p>
-        The function does not return any value. It logs the database connection
-        status and server startup status to the console.
-      </p>
-
-      <h3>Response Behavior:</h3>
-      <p>
-        Upon successful database connection and server start, the following
-        messages are logged:
-      </p>
-      <ul>
-        <li>
-          "database connected" - Indicates that the database connection was
-          successful.
-        </li>
-        <li>
-          `server running on http://localhost:port` - Logs the server's URL,
-          including the specified port.
-        </li>
-      </ul>
-
-      <h3>Example Usage:</h3>
-      <pre>{`startConnection();`}</pre>
-      <p>
-        Calling the <code>startConnection()</code> function will attempt to
-        connect to the database and start the server. It will log success or
-        error messages to the console.
-      </p>
-
-      <h3>Potential Errors:</h3>
-      <p>
-        If there are issues during the database query or server startup, errors
-        will be logged. Some potential errors include:
-      </p>
-      <ul>
-        <li>Database connection failure</li>
-        <li>Server startup failure (e.g., incorrect port)</li>
-        <li>Issues with asynchronous operations or query execution</li>
-      </ul>
-
-      <h3>Error Handling:</h3>
-      <p>
-        If an error occurs, it is caught in the <code>catch</code> block, and
-        the error message is logged to the console. Some examples of error
-        responses:
-      </p>
-
-      <h4>Error Response Example:</h4>
-      <p>
-        <strong>Status Code:</strong> 500 Internal Server Error
-      </p>
-      <pre>{`{
-  "success": false,
-  "msg": "Something went wrong, try again later!"
-}`}</pre>
-      <p>
-        This error typically occurs when there is a problem with the database
-        connection or the server startup process.
-      </p>
-
-      <h3>Notes:</h3>
-      <ul>
-        <li>
-          The function uses <code>dbPromise</code> to execute the database
-          query, which is assumed to be a promise-based API for database
-          operations.
-        </li>
-        <li>
-          The server is started using <code>app.listen(port)</code>, where{" "}
-          <code>port</code> is the port the server should run on.
-        </li>
-        <li>
-          The test query <code>select 'test'</code> is used to ensure that the
-          database connection is valid and the database is reachable.
-        </li>
-      </ul>
-    </section>
-  );
-};
 // *********************
 
 // Authentication Middleware API Document **********************************

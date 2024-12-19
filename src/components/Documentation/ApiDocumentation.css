@@ -149,14 +149,15 @@ hr {
 }
 
 /* Center the container in the middle of the page */
+
 .documentation-container {
-  display: flex;          /* Use flexbox layout */
-  justify-content: space-between; /* Center horizontally */
-  align-items: center;    /* Center vertically */
-  min-height: 100vh;       /* Take full viewport height */
-  padding: 20px;           /* Optional: space around content */
-   margin: 0 ;
-   font-family: Arial, sans-serif;
+  display: flex;               /* Use flexbox layout */
+  justify-content: center;     /* Center horizontally */
+  align-items: center;         /* Center vertically */
+  min-height: 100vh;           /* Take full viewport height */
+  padding: 0 !important;       /* Remove padding to avoid extra space */
+  margin: 0 !important;        /* Remove margin to avoid extra space */
+  font-family: Arial, sans-serif;
   background-color: #f9f9f9;
   color: #333;
 }
@@ -234,30 +235,32 @@ hr {
 }
 /* *********************** */
 .container--flex--wrap {
-    flex-wrap: wrap; /* Ensures elements wrap correctly on mobile */
-    background-color: #44B78B; /* Background color */
-    position: sticky; /* Makes the header sticky */
-   
-    z-index: 10; /* Ensure it appears above other elements */
-    padding: 0!important; /* Remove padding to eliminate spacing */
-    margin-top: 0 !important;
-    box-shadow: 0 4px 6px rgba(119, 48, 48, 0.1); /* Shadow to make it pop */
+  flex-wrap: wrap;             /* Ensures elements wrap correctly on mobile */
+  background-color: #44B78B;   /* Background color */
+  position: sticky;            /* Makes the header sticky */
+  z-index: 10;                 /* Ensure it appears above other elements */
+  padding: 0 !important;       /* Remove padding to eliminate spacing */
+  margin: 0 !important;        /* Remove margin to eliminate any outer space */
+  width: 100%;                 /* Ensure full width of the container */
+  box-shadow: 0 4px 6px rgba(119, 48, 48, 0.1); /* Shadow to make it pop */
 }
 
 /* The flex container to align content */
 .container--flex {
-    display: flex; /* Set to flex layout */
-    align-items: center; /* Vertically center the content */
-    justify-content: center; /* Center horizontally */
-    height: 60px; /* Set the height of the header */
-    text-align: center;
+  display: flex;               /* Set to flex layout */
+  align-items: center;         /* Vertically center the content */
+  justify-content: center;     /* Center horizontally */
+  height: 60px;                /* Set the height of the header */
+  text-align: center;
+  width: 100%; 
+  margin: 0;                /* Ensure full width */
 }
 
 /* Style for the header text */
 .container--flex h1 {
-    font-size: 24px; /* Medium font size for the header */
-    color: #fff; /* White text color */
-    margin: 0; /* Remove any margin around the heading */
+  font-size: 24px;             /* Medium font size for the header */
+  color: #fff;                 /* White text color */
+  margin: 0;                   /* Remove any margin around the heading */
 }
 
 
