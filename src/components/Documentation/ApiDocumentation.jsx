@@ -34,7 +34,9 @@ const startConnection = async () => {
     console.log(error.message);
   }
 };
+startConnection();
 `}
+        <br></br>
         const port = 3000; // Define the port here, or get it from environment:
         process.env.PORT || 3000
       </pre>
@@ -203,6 +205,19 @@ const DbConfigAPI = () => {
         links each question to the user who created it using the{" "}
         <code>userId</code> foreign key.
       </p>
+      <p>
+        <h5>why we use both id and questionId in questions table schema.</h5>{" "}
+        
+        <code>id:</code> A numeric, auto-incrementing identifier used internally
+        by the database for efficient storage and queries. <br></br>Example: 1,
+        2, 3.{" "}
+      </p>
+      <p>
+        <code>questionId:</code> Acts as an externally meaningful, unique
+        identifier for each question. Likely used in URLs, API endpoints, or
+        references where a non-numeric identifier is desirable. <br></br>{" "}
+        Example: "Q-20240101", "Q-12345".
+      </p>
       <h4>Answers Table:</h4>
       <pre>{`CREATE TABLE if not exists answers(
   answerId INT(20) NOT NULL AUTO_INCREMENT,
@@ -230,8 +245,8 @@ const DbConfigAPI = () => {
       <p>
         In case of errors during table creation or database interactions, the
         application will throw errors, and the relevant message will be logged
-        to the console. Ensure that the environment variables are correctly set
-        up.
+        to the console. We first ensure that the environment variables are
+        correctly set up.
       </p>
       <h4>Error Response:</h4>
       <p>
@@ -246,7 +261,6 @@ const DbConfigAPI = () => {
         the database or executing a query. It can also happen if the required
         environment variables are missing or incorrect.
       </p>
-      // acheck db & server both are success fully started h
     </section>
   );
 };
@@ -1081,7 +1095,6 @@ const PostQuestionAPI = () => {
     </section>
   );
 };
-
 
 // Main ApiDocumentation Component
 
