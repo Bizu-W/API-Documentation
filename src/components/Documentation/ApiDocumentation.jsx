@@ -21,10 +21,10 @@ const StartConnectionDoc = () => {
       </p>
 
       <h3>Function Signature:</h3>
-      <pre>{`
+      <pre>
+        {`
 const startConnection = async () => {
   try {
-    const port = 3000;  // Define the port here, or get it from environment: process.env.PORT || 3000
     const result = await dbPromise.execute("select 'test'");
     console.log(result);
     await app.listen(port);
@@ -34,7 +34,10 @@ const startConnection = async () => {
     console.log(error.message);
   }
 };
-`}</pre>
+`}
+        const port = 3000; // Define the port here, or get it from environment:
+        process.env.PORT || 3000
+      </pre>
 
       <h3>Parameters:</h3>
       <p>This function does not take any parameters.</p>
@@ -247,8 +250,6 @@ const DbConfigAPI = () => {
     </section>
   );
 };
-
-// *********************
 
 // Authentication Middleware API Document **********************************
 const AuthAPI = () => {
@@ -1081,6 +1082,7 @@ const PostQuestionAPI = () => {
   );
 };
 
+
 // Main ApiDocumentation Component
 
 const ApiDocumentation = () => {
@@ -1091,13 +1093,12 @@ const ApiDocumentation = () => {
       </div>
       <div className="documentation-container">
         <div className="documentation-content-wrapper">
-          {/* Left Sidebar: Table of Contents */}
+          {/* Left Sidebar Table of Contents */}
           <div className="toc-sidebar">
             <TableOfContents /> {/* TOC Sidebar on the left */}
           </div>
 
-          {/* Right Content Area: API Documentation */}
-
+          {/* Right Content Area API Documentation */}
           <div className="api-content">
             <h2>Welcome to the API documentation</h2>
             <p>Below are the details of the available endpoints:</p>
