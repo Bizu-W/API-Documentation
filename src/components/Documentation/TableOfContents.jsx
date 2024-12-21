@@ -8,6 +8,9 @@ function TableOfContents() {
       </h3>
       <ul>
         <li>
+          <a href="#intro-api">What is API documentation?</a>
+        </li>
+        <li>
           <a href="#srvstr-api">Start Connection</a>
         </li>
         <li>
@@ -21,7 +24,13 @@ function TableOfContents() {
           <a href="#register-api">User Registration</a>
         </li>
         <li>
-          <a href="#login-api">User Login</a>
+          <a href="#checkuser-api">Check User</a>
+        </li>
+        <li>
+          <a href="#login-api">User LogIn</a>
+        </li>
+        <li>
+          <a href="#logout-api">User LogOut</a>
         </li>
         <li>
           <a href="#getanswer-api">Get Answer</a>

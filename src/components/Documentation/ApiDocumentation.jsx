@@ -2,7 +2,54 @@ import React, { useState } from "react";
 import "./ApiDocumentation.css";
 // import { Link } from 'react-router-dom'; // Make sure this import exists
 import TableOfContents from "./TableOfContents";
+// what is **************************
+const ApiDocintroducion = () => {
+  return (
+    <div className="api-documentation">
+      {/* Introduction Section */}
+      <section className="introduction">
+        <h1>Introduction</h1>
+        <p>
+          API documentation is a set of human-readable instructions for using
+          and integrating with an API. It includes detailed information about an
+          API's available endpoints, methods, resources, authentication
+          protocols, parameters, and headers, as well as examples of common
+          requests and responses.
+        </p>
+        <p>This page shows how to use the backend of the Green-Food website.</p>
+      </section>
 
+      {/* HTTP Request Methods Section */}
+      <section className="http-methods">
+        <h2>HTTP Request Methods</h2>
+        <p>
+          HTTP methods are used to indicate the action an API client would like
+          to perform on a given resource. Each HTTP method maps to a specific
+          operation, such as creating, reading, updating, or deleting a
+          resource, and an HTTP method must be included with every request to a
+          REST API.
+        </p>
+        <p>
+          REST (Representational State Transfer) is the most commonly used
+          architectural style for building web services and APIs. It emphasizes
+          standardized, stateless interactions between clients and servers. REST
+          APIs are designed around resources, which are accessible via unique
+          API endpoints.
+        </p>
+      </section>
+
+      {/* Base URL Section */}
+      <section className="base-url">
+        <h2>Base URL</h2>
+        <p>
+          To use this API, send an HTTP request to the base URL:
+          <code> https://localhost:4400 </code>
+          with the given endpoint.
+        </p>
+      </section>
+    </div>
+  );
+};
 //db & server both are successfull
 const StartConnectionDoc = () => {
   return (
@@ -207,7 +254,6 @@ const DbConfigAPI = () => {
       </p>
       <p>
         <h5>why we use both id and questionId in questions table schema.</h5>{" "}
-        
         <code>id:</code> A numeric, auto-incrementing identifier used internally
         by the database for efficient storage and queries. <br></br>Example: 1,
         2, 3.{" "}
@@ -264,7 +310,6 @@ const DbConfigAPI = () => {
     </section>
   );
 };
-
 // Authentication Middleware API Document **********************************
 const AuthAPI = () => {
   return (
@@ -281,6 +326,14 @@ const AuthAPI = () => {
         information by verifying the JWT token provided in the Authorization
         header.
       </p>
+      <p>
+        <h5>The JWT is composed of three parts:</h5>
+        <strong>Header:</strong> Metadata about the token.<br></br>
+        <strong> Payload:</strong> User information and claims (e.g., userId,
+        userName).<br></br>
+        <strong>Signature:</strong> A cryptographic hash that ensures the
+        token's integrity.
+      </p>
 
       <h3>Request Headers:</h3>
       <pre>{`Authorization: Bearer <token>`}</pre>
@@ -289,18 +342,15 @@ const AuthAPI = () => {
         valid Bearer token. The token is typically provided after the user
         successfully logs in and is used to authenticate subsequent requests.
       </p>
-      <p>
-        <h5>The JWT is composed of three parts:</h5>
-        <strong>Header:</strong> Metadata about the token.<br></br>
-        <strong> Payload:</strong> User information and claims (e.g., userId,
-        userName).<br></br>
-        <strong>Signature:</strong> A cryptographic hash that ensures the token's integrity.
-      </p>
 
       <h3>Response:</h3>
       <h4>Successful Response:</h4>
-      <p>Status Code: 200 OK</p>
-      <p>Content-Type: application/json</p>
+      <p>
+        <strong>Status Code:</strong> 200 OK
+      </p>
+      <p>
+        <strong>Content-Type:</strong> application/json
+      </p>
       <pre>
         {`{
   "msg": "valid user",
@@ -348,10 +398,10 @@ const AuthAPI = () => {
         <h3>Example Usage</h3>
 
         <div className="api-example">
-          <code>
-            GET /api/user/checkUser <br />
+          <per>
+            GET: /api/user/checkUser <br />
             Authorization: Bearer &lt;your_jwt_token&gt;
-          </code>
+          </per>
         </div>
       </div>
     </section>
@@ -372,8 +422,10 @@ const RegisterAPI = () => {
         <strong>Description:</strong> Registers a new user with the provided
         username, first name, last name, email, and password. Password must be
         at least 8 characters long. If the username or email is already taken,
-        registration will fail.
+        registration will fail. The API also generates a JWT token upon
+        successful registration.
       </p>
+
       <h3>Request Body:</h3>
       <p>The request body should contain the following fields:</p>
       <pre>
@@ -389,28 +441,39 @@ const RegisterAPI = () => {
         <strong>Required Fields:</strong> `userName`, `firstName`, `lastName`,
         `email`, and `password` are mandatory for registration.
       </p>
+
       <h3>Response:</h3>
       <h4>Successful Response:</h4>
       <p>
-        <strong>Status Code:</strong> 201 Created
+        <strong>Status Code:</strong> 200 OK
       </p>
       <p>
         <strong>Content-Type:</strong> application/json
       </p>
       <pre>
         {`{
-  "msg": "user register"
+  "data": {
+    "userId": "number", // Unique user ID
+    "userName": "string", // User's username
+    "firstName": "string", // User's first name
+    "lastName": "string", // User's last name
+    "email": "string" // User's email
+  },
+  "token": "string" // JWT token for user authentication
 }`}
       </pre>
       <p>
         <strong>Description:</strong> If registration is successful, the API
-        returns a success message.
+        returns the user's data along with a JWT token for authentication.
       </p>
-      <h4>Error Responses:(Missing Required Fields)</h4>
-      {/* <div className="container">
+
+      <h4>Error Responses</h4>
+      <div className="container">
         <div className="circle">1</div>
-        <div className="error-text"><h5></h5></div>
-      </div> */}
+        <div className="error-text">
+          <h5>Missing Required Fields</h5>
+        </div>
+      </div>
       <p>
         <strong>Status Code:</strong> 400 Bad Request
       </p>
@@ -419,12 +482,14 @@ const RegisterAPI = () => {
   "msg": "please provide all required fields!"
 }`}
       </pre>
+      <div className="container">
+        <div className="circle">2</div>
+        <div className="error-text">
+          <h5>User Already Exists</h5>
+        </div>
+      </div>
+
       <p>
-        <strong>Description:</strong> One or more required fields are missing in
-        the request body.
-      </p>
-      <p>
-        <h4>Error Responses:(User Already Exists)</h4>
         <strong>Status Code:</strong> 400 Bad Request
       </p>
       <pre>
@@ -432,14 +497,12 @@ const RegisterAPI = () => {
   "msg": "user already existed"
 }`}
       </pre>
-      <p>
-        <strong>Description:</strong> The username or email is already taken, so
-        the registration fails.
-      </p>
-
-      <h4>
-        Error Responses:Password Validation Failed (less than 8 characters)
-      </h4>
+      <div className="container">
+        <div className="circle">3</div>
+        <div className="error-text">
+          <h5>Password Validation Failed</h5>
+        </div>
+      </div>
 
       <p>
         <strong>Status Code:</strong> 400 Bad Request
@@ -449,12 +512,27 @@ const RegisterAPI = () => {
   "msg": "password must be at least 8 characters"
 }`}
       </pre>
+      <div className="container">
+        <div className="circle">4</div>
+        <div className="error-text">
+          <h5>Invalid Email Format</h5>
+        </div>
+      </div>
       <p>
-        <strong>Description:</strong> The password must be at least 8 characters
-        long.
+        <strong>Status Code:</strong> 400 Bad Request
       </p>
-
-      <h4>Error Responses:(Internal Server Error)</h4>
+      <pre>
+        {`{
+  "success": false,
+  "message": "Please enter a valid email"
+}`}
+      </pre>
+      <div className="container">
+        <div className="circle">5</div>
+        <div className="error-text">
+          <h5>Internal Server Error</h5>
+        </div>
+      </div>
       <p>
         <strong>Status Code:</strong> 500 Internal Server Error
       </p>
@@ -468,24 +546,72 @@ const RegisterAPI = () => {
         typically happens if there's an issue with database operations or other
         unexpected issues.
       </p>
+
       <div className="api-doc-section">
         <h3>Example Usage</h3>
-
         <div className="api-example">
-          <code>
-            POST /api/register <br />
+          <per>
+            POST /api/user/register <br />
             Content-Type: application/json <br />
             Body: <br />
             {`{
-  "userName": "johnDoe",
-  "firstName": "John",
+  "userName": "AbebeDoe",
+  "firstName": "Abebe",
   "lastName": "Doe",
-  "email": "johndoe@example.com",
+  "email": "Abebedoe@example.com",
   "password": "SecurePass123"
 }`}
-          </code>
+          </per>
         </div>
       </div>
+    </section>
+  );
+};
+// check user validation API document *********************************************
+const CheckUserAPI = () => {
+  return (
+    <section className="api-section" id="checkuser-api">
+      <h2>Check User API</h2>
+      <p>
+        <strong>Endpoint:</strong> <code>/api/user/check</code>
+      </p>
+      <p>
+        <strong>Method:</strong> GET
+      </p>
+      <p>
+        <strong>Description:</strong> Confirms if the user is valid by
+        retrieving their username and user ID from the request. Returns a
+        success message along with the user information.
+      </p>
+
+      <h3>Request:</h3>
+      <p>The request must include the following:</p>
+      <ul>
+        <li>
+          A valid authentication token in the headers, which provides the user's
+          information.
+        </li>
+      </ul>
+
+      <h3>Response:</h3>
+      <h4>Successful Response:</h4>
+      <p>
+        <strong>Status Code:</strong> 200 OK
+      </p>
+      <p>
+        <strong>Content-Type:</strong> application/json
+      </p>
+      <pre>
+        {`{
+  "msg": "valid user",
+  "userName": "string",
+  "userId": "string"
+}`}
+      </pre>
+      <p>
+        <strong>Description:</strong> Confirms the user is valid and includes
+        the user's username and ID in the response.
+      </p>
     </section>
   );
 };
@@ -600,6 +726,49 @@ const LoginAPI = () => {
     </section>
   );
 };
+// loug out API document ************************************************
+const LogOutAPI = () => {
+  return (
+    <section className="api-section" id="logout-api">
+      <h2>Log Out API</h2>
+      <p>
+        <strong>Endpoint:</strong> <code>/api/user/logout</code>
+      </p>
+      <p>
+        <strong>Method:</strong> POST
+      </p>
+      <p>
+        <strong>Description:</strong> Logs out the authenticated user and
+        returns a confirmation message indicating the logout was successful.
+      </p>
+
+      <h3>Request:</h3>
+      <p>
+        This endpoint does not require a request body. Ensure the user is
+        authenticated before calling this endpoint.
+      </p>
+
+      <h3>Response:</h3>
+      <h4>Successful Response:</h4>
+      <p>
+        <strong>Status Code:</strong> 200 OK
+      </p>
+      <p>
+        <strong>Content-Type:</strong> application/json
+      </p>
+      <pre>
+        {`{
+  "success": true,
+  "msg": "successfuly logout"
+}`}
+      </pre>
+      <p>
+        <strong>Description:</strong> Indicates that the user has been
+        successfully logged out.
+      </p>
+    </section>
+  );
+};
 // Post Answer API Section *******************************************
 const PostAnswerAPI = () => {
   return (
@@ -660,14 +829,14 @@ const PostAnswerAPI = () => {
       <div className="api-doc-section">
         <h3>Example Usage</h3>
         <div className="api-example">
-          <code>
+          <per>
             POST /api/answers <br />
             Request Body: <br />
             {`{
   "questionId": "1234abcd5678efgh",
   "answer": "This is my answer."
 }`}
-          </code>
+          </per>
         </div>
       </div>
     </section>
@@ -751,7 +920,7 @@ const GetAnswerAPI = () => {
       <div className="api-doc-section">
         <h3>Example Usage</h3>
         <div className="api-example">
-          <code>
+          <per>
             GET /api/questions/1/answers <br />
             <strong>Response:</strong> <br />
             {`{
@@ -769,7 +938,7 @@ const GetAnswerAPI = () => {
     }
   ]
 }`}
-          </code>
+          </per>
         </div>
       </div>
     </section>
@@ -782,7 +951,7 @@ const GetAllQuestionsAPI = () => {
     <section className="api-section" id="getallqu-api">
       <h2>Get All Questions API</h2>
       <p>
-        <strong>Endpoint:</strong> <code>/api/questions</code>
+        <strong>Endpoint:</strong> <code>/api/question</code>
       </p>
       <p>
         <strong>Method:</strong> GET
@@ -1055,7 +1224,7 @@ const PostQuestionAPI = () => {
       <div className="api-doc-section">
         <h3>Example Usage</h3>
         <div className="api-example">
-          <code>
+          <per>
             POST /api/questions <br />
             Content-Type: application/json <br />
             Body: <br />
@@ -1063,7 +1232,7 @@ const PostQuestionAPI = () => {
   "title": "How do I use async/await in JavaScript?",
   "description": "I want to learn how async/await works in JavaScript."
 }`}
-          </code>
+          </per>
         </div>
       </div>
 
@@ -1124,11 +1293,14 @@ const ApiDocumentation = () => {
             <p>Below are the details of the available endpoints:</p>
             <hr />
             {/* These sections will be linked from the TOC */}
+            <ApiDocintroducion />
             <StartConnectionDoc />
             <DbConfigAPI />
             <AuthAPI />
             <RegisterAPI />
+            <CheckUserAPI />
             <LoginAPI />
+            <LogOutAPI />
             <GetAnswerAPI />
             <PostAnswerAPI />
             <GetAllQuestionsAPI />
