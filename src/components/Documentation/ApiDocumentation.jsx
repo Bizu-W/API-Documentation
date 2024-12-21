@@ -289,6 +289,13 @@ const AuthAPI = () => {
         valid Bearer token. The token is typically provided after the user
         successfully logs in and is used to authenticate subsequent requests.
       </p>
+      <p>
+        <h5>The JWT is composed of three parts:</h5>
+        <strong>Header:</strong> Metadata about the token.<br></br>
+        <strong> Payload:</strong> User information and claims (e.g., userId,
+        userName).<br></br>
+        <strong>Signature:</strong> A cryptographic hash that ensures the token's integrity.
+      </p>
 
       <h3>Response:</h3>
       <h4>Successful Response:</h4>
