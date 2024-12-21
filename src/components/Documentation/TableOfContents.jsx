@@ -39,6 +39,9 @@ function TableOfContents() {
           <a href="#postanswer-api">post Answer</a>
         </li>
         <li>
+          <a href="#deleteanswer-api">Delete Answer</a>
+        </li>
+        <li>
           <a href="#getallqu-api">Get All Questions</a>
         </li>
         <li>
