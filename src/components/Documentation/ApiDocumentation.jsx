@@ -2,54 +2,47 @@ import React, { useState } from "react";
 import "./ApiDocumentation.css";
 // import { Link } from 'react-router-dom'; // Make sure this import exists
 import TableOfContents from "./TableOfContents";
+
 // what is **************************
 const ApiDocintroducion = () => {
   return (
-    <div className="api-documentation">
-      {/* Introduction Section */}
-      <section className="introduction">
-        <h1>Introduction</h1>
-        <p>
-          API documentation is a set of human-readable instructions for using
-          and integrating with an API. It includes detailed information about an
-          API's available endpoints, methods, resources, authentication
-          protocols, parameters, and headers, as well as examples of common
-          requests and responses.
-        </p>
-        <p>This page shows how to use the backend of the Green-Food website.</p>
-      </section>
+    <section className="api-section" id="intro-api">
+      <h2>API Documentation</h2>
 
-      {/* HTTP Request Methods Section */}
-      <section className="http-methods">
-        <h2>HTTP Request Methods</h2>
-        <p>
-          HTTP methods are used to indicate the action an API client would like
-          to perform on a given resource. Each HTTP method maps to a specific
-          operation, such as creating, reading, updating, or deleting a
-          resource, and an HTTP method must be included with every request to a
-          REST API.
-        </p>
-        <p>
-          REST (Representational State Transfer) is the most commonly used
-          architectural style for building web services and APIs. It emphasizes
-          standardized, stateless interactions between clients and servers. REST
-          APIs are designed around resources, which are accessible via unique
-          API endpoints.
-        </p>
-      </section>
+      <h3>Introduction</h3>
+      <p>
+        API documentation is a set of human-readable instructions for using and
+        integrating with an API. It includes detailed information about an API's
+        available endpoints, methods, resources, authentication protocols,
+        parameters, and headers, as well as examples of common requests and
+        responses. This page shows how to use the backend of the Green-Food
+        website.
+      </p>
 
-      {/* Base URL Section */}
-      <section className="base-url">
-        <h2>Base URL</h2>
-        <p>
-          To use this API, send an HTTP request to the base URL:
-          <code> https://localhost:4400 </code>
-          with the given endpoint.
-        </p>
-      </section>
-    </div>
+      <h3>HTTP Request Methods</h3>
+      <p>
+        <>HTTP</> methods are used to indicate the action an API client would
+        like to perform on a given resource. Each HTTP method maps to a specific
+        operation, such as creating, reading, updating, or deleting a resource,
+        and an HTTP method must be included with every request to a REST API.
+      </p>
+      <p>
+        REST (Representational State Transfer) is the most commonly used
+        architectural style for building web services and APIs, and it
+        emphasizes standardized, stateless interactions between clients and
+        servers. REST APIs are designed around resources, which are accessible
+        via unique API endpoints.
+      </p>
+
+      <h3>Base URL</h3>
+      <p>
+        To use this API, send an HTTP request to the base URL:{" "}
+        <code>https://localhost:4400</code> with the given endpoint.
+      </p>
+    </section>
   );
 };
+
 //db & server both are successfull
 const StartConnectionDoc = () => {
   return (
@@ -1271,6 +1264,7 @@ const PostQuestionAPI = () => {
     </section>
   );
 };
+//summery*******************************
 
 // Main ApiDocumentation Component
 
@@ -1306,6 +1300,7 @@ const ApiDocumentation = () => {
             <GetAllQuestionsAPI />
             <GetSingleQuestionAPI />
             <PostQuestionAPI />
+            {/* <ApiDocsummery/> */}
           </div>
         </div>
       </div>

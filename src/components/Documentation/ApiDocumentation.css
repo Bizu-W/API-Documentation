@@ -215,7 +215,7 @@ hr {
   flex-wrap: wrap; /* Ensures elements wrap correctly on mobile */
   background-color: #44b78b; /* Background color */
   position: sticky; /* Makes the header sticky */
-  z-index: 10; /* Ensure it appears above other elements */
+  z-index: 5; /* Ensure it appears above other elements */
   padding: 0 !important; /* Remove padding to eliminate spacing */
   margin: 0 !important; /* Remove margin to eliminate any outer space */
   width: 100%; /* Ensure full width of the container */
