@@ -561,53 +561,53 @@ const RegisterAPI = () => {
   );
 };
 // check user validation API document *********************************************
-const CheckUserAPI = () => {
-  return (
-    <section className="api-section" id="checkuser-api">
-      <h2>Check User API</h2>
-      <p>
-        <strong>Endpoint:</strong> <code>/api/user/check</code>
-      </p>
-      <p>
-        <strong>Method:</strong> GET
-      </p>
-      <p>
-        <strong>Description:</strong> Confirms if the user is valid by
-        retrieving their username and user ID from the request. Returns a
-        success message along with the user information.
-      </p>
+// const CheckUserAPI = () => {
+//   return (
+//     <section className="api-section" id="checkuser-api">
+//       <h2>Check User API</h2>
+//       <p>
+//         <strong>Endpoint:</strong> <code>/api/user/check</code>
+//       </p>
+//       <p>
+//         <strong>Method:</strong> GET
+//       </p>
+//       <p>
+//         <strong>Description:</strong> Confirms if the user is valid by
+//         retrieving their username and user ID from the request. Returns a
+//         success message along with the user information.
+//       </p>
 
-      <h3>Request:</h3>
-      <p>The request must include the following:</p>
-      <ul>
-        <li>
-          A valid authentication token in the headers, which provides the user's
-          information.
-        </li>
-      </ul>
+//       <h3>Request:</h3>
+//       <p>The request must include the following:</p>
+//       <ul>
+//         <li>
+//           A valid authentication token in the headers, which provides the user's
+//           information.
+//         </li>
+//       </ul>
 
-      <h3>Response:</h3>
-      <h4>Successful Response:</h4>
-      <p>
-        <strong>Status Code:</strong> 200 OK
-      </p>
-      <p>
-        <strong>Content-Type:</strong> application/json
-      </p>
-      <pre>
-        {`{
-  "msg": "valid user",
-  "userName": "string",
-  "userId": "string"
-}`}
-      </pre>
-      <p>
-        <strong>Description:</strong> Confirms the user is valid and includes
-        the user's username and ID in the response.
-      </p>
-    </section>
-  );
-};
+//       <h3>Response:</h3>
+//       <h4>Successful Response:</h4>
+//       <p>
+//         <strong>Status Code:</strong> 200 OK
+//       </p>
+//       <p>
+//         <strong>Content-Type:</strong> application/json
+//       </p>
+//       <pre>
+//         {`{
+//   "msg": "valid user",
+//   "userName": "string",
+//   "userId": "string"
+// }`}
+//       </pre>
+//       <p>
+//         <strong>Description:</strong> Confirms the user is valid and includes
+//         the user's username and ID in the response.
+//       </p>
+//     </section>
+//   );
+// };
 //login API Documntation section **************************************
 const LoginAPI = () => {
   return (

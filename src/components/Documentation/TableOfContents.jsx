@@ -23,9 +23,9 @@ function TableOfContents() {
         <li>
           <a href="#register-api">User Registration</a>
         </li>
-        <li>
+        {/* <li>
           <a href="#checkuser-api">Check User</a>
-        </li>
+        </li> */}
         <li>
           <a href="#login-api">User LogIn</a>
         </li>
