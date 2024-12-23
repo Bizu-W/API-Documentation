@@ -15,7 +15,7 @@ const ApiDocintroducion = () => {
         integrating with an API. It includes detailed information about an API's
         available endpoints, methods, resources, authentication protocols,
         parameters, and headers, as well as examples of common requests and
-        responses. This page shows how to use the backend of the Green-Food
+        responses. This page shows how to use the backend of the Evangadi Forum
         website.
       </p>
 
@@ -37,7 +37,7 @@ const ApiDocintroducion = () => {
       <h3>Base URL</h3>
       <p>
         To use this API, send an HTTP request to the base URL:{" "}
-        <code>https://localhost:4400</code> with the given endpoint.
+        <code>https://localhost:3003</code> with the given endpoint.
       </p>
     </section>
   );
@@ -76,9 +76,9 @@ const startConnection = async () => {
 };
 startConnection();
 `}
-        <br></br>
+        {/* <br></br>
         const port = 3000; // Define the port here, or get it from environment:
-        process.env.PORT || 3000
+        process.env.PORT || 3000 */}
       </pre>
 
       <h3>Parameters:</h3>
@@ -169,9 +169,9 @@ const DbConfigAPI = () => {
   return (
     <section className="api-section" id="con-api">
       <h2>Database Configuration and Table Creation</h2>
-      {/* <p>
+      <p>
         <strong>File:</strong> <code>dbConfig.js</code>
-      </p> */}
+      </p>
       <p>
         <strong>Description:</strong> This file handles the database connection
         setup and table creation for user-related data and question/answer
@@ -728,7 +728,7 @@ const LogOutAPI = () => {
         <strong>Endpoint:</strong> <code>/api/user/logout</code>
       </p>
       <p>
-        <strong>Method:</strong> POST
+        <strong>Method:</strong> DELETE
       </p>
       <p>
         <strong>Description:</strong> Logs out the authenticated user and
@@ -1190,10 +1190,10 @@ const GetSingleQuestionAPI = () => {
       <div className="api-doc-section">
         <h3>Example Usage</h3>
         <div className="api-example">
-          <code>
+          <per>
             GET /api/questions/<strong>{`<questionId>`}</strong> <br />
             Example: GET /api/questions/1234abcd5678efgh
-          </code>
+          </per>
         </div>
       </div>
 
@@ -1383,7 +1383,6 @@ const PostQuestionAPI = () => {
 //summery*******************************
 
 // Main ApiDocumentation Component
-
 const ApiDocumentation = () => {
   return (
     <>
@@ -1400,7 +1399,7 @@ const ApiDocumentation = () => {
           {/* Right Content Area API Documentation */}
           <div className="api-content">
             <h2>Welcome to the API documentation</h2>
-            <p>Below are the details of the available endpoints:</p>
+            <p>Below are the details of the API documentation:</p>
             <hr />
             {/* These sections will be linked from the TOC */}
             <ApiDocintroducion />
